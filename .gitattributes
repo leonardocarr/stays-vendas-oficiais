@@ -1,0 +1,10 @@
+# Arquivos binários: sem conversão de quebra de linha, que os corromperia
+*.pdf     binary
+*.parquet binary
+
+# Texto: normaliza para LF no repositório
+*.py  text eol=lf
+*.sql text eol=lf
+*.md  text eol=lf
+*.csv text eol=lf
+*.txt text eol=lf
