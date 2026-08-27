@@ -2,6 +2,8 @@
 
 Pipeline que pega um extrato bruto de oportunidades do CRM e devolve a contagem de vendas oficiais por mês e por país, separando venda nova de upgrade e reativação.
 
+A resolução completa do case, organizada na ordem das perguntas, está em [Case_Stays_Leonardo_Ruiz.pdf](Case_Stays_Leonardo_Ruiz.pdf). Este README cobre o mesmo conteúdo pela ótica de quem vai rodar o projeto.
+
 ## O problema
 
 O CRM registra tudo como "oportunidade": a venda nova, o upgrade de plano de quem já é cliente e a reativação de quem tinha cancelado. Os três trazem receita, e o relatório financeiro soma os três. Só que a pergunta "o comercial está trazendo cliente novo, e em que ritmo?" precisa de um número diferente. Somar upgrade junto responde errado essa pergunta.
