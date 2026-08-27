@@ -48,6 +48,8 @@ Rascunhado com apoio de IA a partir do schema e dos comentários de premissa dei
 
 Como `classe` é definida: `upgrade` quando `plano_anterior_upgrade` está preenchido; senão `reativacao` quando `sdr_perfil` é `Customer Success - Retenção`; senão `nova_venda`.
 
+Ao usar `classe`, saiba que `nova_venda` é o valor de descarte da regra: uma linha cai nele por não ter batido nas duas condições anteriores, não por haver evidência de que seja venda nova. Como `sdr_perfil` vem vazio em 9 das 43 linhas do extrato, parte das vendas novas está classificada assim por ausência de informação. Detalhe em [Outros riscos encontrados](../README.md#outros-riscos-encontrados).
+
 ## Log de rejeitados
 
 **Arquivo:** `data/02_silver_processed/oportunidades_rejeitadas.csv`, ou a CTE `rejeitados` no SQL (ver `sql/run_rejeitados.py`)

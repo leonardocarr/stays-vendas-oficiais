@@ -65,11 +65,23 @@ Esse último caso só apareceu porque o log separa por motivo. Uma contagem agre
 
 *Tratamento:* adoto DD/MM como padrão e só inverto quando o segundo número passa de 12, o que torna DD/MM impossível. As linhas realmente ambíguas ganham a flag `data_ambigua` em vez de serem resolvidas em silêncio: são 10 das 43. Nelas, as duas leituras sempre caem em meses diferentes, e isso afeta R$ 5.380 de MRR em vendas ganhas. A saída de verdade é conferir essas datas no CRM; a flag existe para que alguém saiba que precisa conferir.
 
-**3. As categorias foram digitadas de formas diferentes.** `pais` aparece como `"BRASIL"`, `"Brasil"`, `"BR"`, `"brasil"` e `"Hispan"`. `estagio` mistura português e inglês: `"Fechado - Ganho"`, `"Fechado/Ganho"`, `"Closed Won"`, `"fechado/ganho"`. Isso sub ou superestima vendas por país e pode fazer uma venda ganha não ser reconhecida como tal.
+**3. As categorias foram digitadas de formas diferentes.** São 8 grafias distintas em `pais` para 3 países: `"BRASIL"`, `"Brasil"`, `"brasil"`, `"BR"`, `"ESPANHA"`, `"Espanha"`, `"Hispan"` e `"México"`. Em `estagio` são 7 valores, misturando português e inglês: `"Fechado - Ganho"`, `"Fechado/Ganho"`, `"fechado/ganho"`, `"Closed Won"`, além dos equivalentes de perdido e do `"Qualificação"`. Isso sub ou superestima vendas por país e pode fazer uma venda ganha não ser reconhecida como tal.
 
 *Tratamento:* um mapa de normalização único, em um só lugar do código, com saída explícita para `NULL` quando o valor não é reconhecido. Um valor novo aparecendo no extrato fica visível como não mapeado, em vez de ser descartado ou classificado errado por acidente.
 
-Um quarto risco, fora dos três pedidos: `valor_mrr` mistura `"1.490,00"` com `"R$ 1.400"`. Nesse segundo caso o ponto é separador de milhar, mas `float("1.400")` em Python devolve `1.4`. A regra adotada é ler ponto seguido de três dígitos, sem vírgula na string, como milhar.
+## Outros riscos encontrados
+
+Os três acima são os que respondem ao que foi pedido. Estes apareceram durante a análise e valem registro.
+
+**`sdr_perfil` vem vazio em 9 das 43 linhas, e é ele que identifica reativação.** Esse é o mais incômodo. A regra de classificação só reconhece reativação quando `sdr_perfil` é `"Customer Success - Retenção"`. Sem o campo, a linha cai em `nova_venda` por descarte, não por evidência. Hoje **6 das 19 vendas novas do relatório** estão nessa situação: se alguma delas for reativação, está sendo contada na conta errada, inflando aquisição e escondendo recuperação de churn.
+
+Não dá para resolver isso no código, porque o dado que decidiria não está no arquivo. O tratamento honesto é: manter a classificação atual, deixar registrado que ela vale enquanto o campo estiver preenchido, e pedir ao time do CRM ou a obrigatoriedade do campo, ou um flag próprio de reativação, do mesmo jeito que o upgrade já tem em `plano_anterior_upgrade`. Depender de "quem atendeu" para dizer "o que foi a venda" é frágil: basta uma reativação ser tocada por outro time para ela virar venda nova sem ninguém perceber.
+
+**`valor_mrr` mistura formatos.** Convivem `"1.490,00"` e `"R$ 1.400"`. No segundo caso o ponto é separador de milhar, mas `float("1.400")` em Python devolve `1.4`. A regra adotada lê ponto seguido de três dígitos, sem vírgula na string, como milhar. Foi um bug real encontrado na primeira versão do código.
+
+**6 vendas entram no relatório sem valor de MRR.** A contagem delas está certa, mas o `SUM` ignora nulo em silêncio, então o `mrr_total` do grupo fica menor do que a realidade, ou nulo quando nenhuma linha do grupo tem valor. A flag `mrr_ausente` marca essas linhas na camada tratada.
+
+**Vendas ganhas sem data de fechamento.** Descrito na seção anterior: 5 linhas, R$ 5.860 de MRR fora do relatório.
 
 ## Premissas em aberto
 
