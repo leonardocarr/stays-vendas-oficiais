@@ -95,7 +95,9 @@ Se alguém do negócio confirmar ou corrigir qualquer uma, o ajuste é em um pon
 
 ## Uso de IA
 
-Detalhes de onde usei, com os prompts, e onde não confiei sem conferir: [docs/uso_de_ia.md](docs/uso_de_ia.md).
+[docs/uso_de_ia.md](docs/uso_de_ia.md) descreve em que etapas usei, com os prompts de cada uma, e onde não aceitei a saída sem conferir. Traz também a proposta de manter o dicionário de dados gerado a partir do código, para que ele não envelheça e ninguém precise me procurar para entender a saída.
+
+O critério que uso para decidir, resumido: antes de aceitar qualquer resposta, pergunto como eu descobriria que ela está errada. Se a checagem é rodar contra o dado ou reler o código, uso. Se só saberia se alguém do negócio me contasse, não uso para decidir.
 
 ## Documentação do modelo
 
