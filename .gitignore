@@ -1,0 +1,19 @@
+# Ambiente virtual
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Editor
+.vscode/
+.idea/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

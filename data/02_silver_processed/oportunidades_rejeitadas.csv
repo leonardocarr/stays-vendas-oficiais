@@ -1,0 +1,16 @@
+_id,conta,pais_norm,status_norm,data_venda,mrr,classe,motivo_rejeicao
+1004,Urban Flats,Brasil,Ganho,2026-02-14,,nova_venda,duplicata
+1008,Aluga Fácil,Brasil,Ganho,2026-02-01,,nova_venda,duplicata
+1040,Playa Norte,Espanha,Perdido,2026-06-24,690.0,nova_venda,status_perdido
+1039,Alquila Sur,Espanha,Pipeline,2026-03-04,690.0,nova_venda,status_pipeline
+1033,Urban Flats,Brasil,Perdido,2026-01-09,690.0,nova_venda,status_perdido
+1035,Urban Flats,Brasil,Perdido,,490.0,nova_venda,status_perdido
+1038,Sol y Mar,Espanha,Pipeline,,490.0,nova_venda,status_pipeline
+1003,StayHost BR,Brasil,Ganho,,490.0,nova_venda,ganho_sem_data_fechamento
+1037,Beira-Mar Gestão,Brasil,Perdido,,990.0,nova_venda,status_perdido
+1034,Aluga Fácil,Brasil,Pipeline,,490.0,nova_venda,status_pipeline
+1012,Recanto Locações,Brasil,Ganho,,1490.0,nova_venda,ganho_sem_data_fechamento
+1009,Temporada Rio,Brasil,Ganho,,1490.0,nova_venda,ganho_sem_data_fechamento
+1013,Litoral Homes,Brasil,Ganho,,990.0,nova_venda,ganho_sem_data_fechamento
+1019,Madrid Stays,Espanha,Ganho,,1400.0,nova_venda,ganho_sem_data_fechamento
+1036,Urban Flats,Brasil,Pipeline,2026-12-03,,nova_venda,status_pipeline
